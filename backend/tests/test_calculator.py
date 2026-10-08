@@ -1,7 +1,7 @@
 """Calculator tests. Expected values are computed by hand (see comments), not by
 the engine. NOTE: these are arithmetic reference cases on a synthetic rate table;
 they are not transcriptions of real court rulings."""
-from datetime import date
+from datetime import date, timedelta
 from decimal import Decimal as D
 
 import pytest
@@ -11,25 +11,40 @@ from app.engine.calculator import (
     apply_tmc_cap, calculate_day_by_day_ledger, get_applicable_rate, select_category,
 )
 from app.engine.cmf_rates import RateNotFoundError, RateTable, load_default_table
-from app.schemas.liquidation import Currency, LiquidationParams, RateCategory
+from app.schemas.liquidation import Currency, DayCount, LiquidationParams, RateCategory
 
-def _rates(corr_a, corr_b, corr_uf):
-    r = lambda c: {"corriente": str(c), "tmc": str(D(str(c)) * D("1.5"))}
-    return {"clp_lt_200": r(corr_a), "clp_gte_200": r(corr_b), "uf": r(corr_uf)}
+def _rates(under50, mid, over, uf, tmc_mid=None):
+    r = lambda c, t=None: {"corriente": str(c), "tmc": str(t if t is not None else D(str(c)) * D("1.5"))}
+    return {"non_reajustable_clp_under_50_uf": r(under50),
+            "non_reajustable_clp_50_to_200_uf": r(mid, tmc_mid),
+            "non_reajustable_clp_over_200_uf": r(over), "reajustable_uf_all": r(uf)}
 
+def _period(ym, frm, to, rates):
+    return {"period_id": ym, "valid_from": frm, "valid_to": to, "rates": rates}
+
+UF10 = {"2023-12": "36000.00", "2024-01": "36000.00", "2024-02": "36360.00",
+        "2024-03": "36720.00", "2024-04": "37000.00"}
 TABLE = RateTable({
-    "metadata": {"verified": True, "source": "synthetic test table"},
-    "uf_10th": {"2023-12": "36000.00", "2024-01": "36000.00", "2024-02": "36360.00",
-                "2024-03": "36720.00", "2024-04": "37000.00"},
-    "rates": {
-        "2024-01": _rates("28.00", "12.00", "5.00"),
-        "2024-02": _rates("30.00", "13.00", "5.00"),
-        "2024-03": _rates("30.00", "13.00", "5.00"),
-    },
+    "metadata": {"verified": True, "source": "synthetic test table"}, "uf_10th": UF10,
+    "periods": [
+        _period("2024-01", "2024-01-01", "2024-01-31", _rates("28.00", "28.00", "12.00", "5.00")),
+        _period("2024-02", "2024-02-01", "2024-02-29", _rates("30.00", "30.00", "13.00", "5.00")),
+        _period("2024-03", "2024-03-01", "2024-03-31", _rates("30.00", "30.00", "13.00", "5.00")),
+    ],
 })
 
+# UNVERIFIED vectors supplied by an external research tool (Q1 2024, >=200 UF).
+def _q1(p2_to):
+    o = lambda c: _rates("28.12", "21.34", c, "5.12")
+    return RateTable({"metadata": {"verified": True, "source": "external vector"}, "uf_10th": UF10,
+        "periods": [_period("2024-01", "2024-01-15", "2024-02-14", o("14.40")),
+                    _period("2024-02", "2024-02-15", p2_to, o("13.80")),
+                    _period("2024-03", "2024-03-16" if p2_to == "2024-03-15" else "2024-03-15",
+                            "2024-04-14", o("13.10"))]})
+
 def clp(**kw):
-    base = dict(principal=D(1_000_000), currency=Currency.CLP, issue_date=date(2024, 1, 1))
+    base = dict(principal=D(1_000_000), currency=Currency.CLP, issue_date=date(2024, 1, 1),
+                day_count=DayCount.ACT_365)
     return LiquidationParams(**{**base, **kw})
 
 def test_single_month_corriente():
@@ -37,8 +52,8 @@ def test_single_month_corriente():
     led = calculate_day_by_day_ledger(
         clp(maturity_date=date(2024, 1, 31), cutoff_date=date(2024, 2, 29)), TABLE)
     assert led.interest_clp == D(23836) and led.total_clp == D(1_023_836)
-    assert len(led.days) == 59 and led.category is RateCategory.CLP_LT_200
-    assert led.warnings == []
+    assert len(led.days) == 59 and led.category is RateCategory.CLP_UNDER_50
+    assert not [w for w in led.warnings if "TMC" in w]
 
 def test_no_interest_before_maturity_without_agreed_rate():
     led = calculate_day_by_day_ledger(
@@ -69,14 +84,14 @@ def test_agreed_rate_below_cap_applies_both_phases():
     led = calculate_day_by_day_ledger(
         clp(maturity_date=date(2024, 1, 31), cutoff_date=date(2024, 2, 29),
             agreed_rate=D(24)), TABLE)
-    assert led.interest_clp == D(38795) and led.warnings == []
+    assert led.interest_clp == D(38795) and not [w for w in led.warnings if "TMC" in w]
 
 def test_bracket_gte_200_uf():
     # 10,000,000 / 36,000 = 277.8 UF -> >=200 ; 13% : *13%*29/365 = 103,287.67->103,288
     led = calculate_day_by_day_ledger(
         clp(principal=D(10_000_000), maturity_date=date(2024, 1, 31),
             cutoff_date=date(2024, 2, 29)), TABLE)
-    assert led.category is RateCategory.CLP_GTE_200 and led.interest_clp == D(103288)
+    assert led.category is RateCategory.CLP_OVER_200 and led.interest_clp == D(103288)
 
 def test_uf_value_anchors_and_interpolation():
     assert TABLE.uf_value(date(2024, 2, 10)) == D("36360.00")
@@ -88,7 +103,7 @@ def test_uf_operation_ledger():
     led = calculate_day_by_day_ledger(
         LiquidationParams(principal=D(100), currency=Currency.UF,
                           issue_date=date(2024, 2, 10), maturity_date=date(2024, 2, 10),
-                          cutoff_date=date(2024, 2, 20)), TABLE)
+                          cutoff_date=date(2024, 2, 20), day_count=DayCount.ACT_365), TABLE)
     assert led.interest_native == D("0.1370") and led.category is RateCategory.UF
     uf_cut = 36360 * (36720 / 36360) ** (10 / 29)
     assert abs(float(led.total_clp) - 100.1370 * uf_cut) <= 1.0
@@ -100,8 +115,10 @@ def test_get_applicable_rate_and_cap_helpers():
     assert (d.annual_rate, d.tmc, d.source) == (D("30.00"), D("45.00"), "corriente")
     assert apply_tmc_cap(D(50), D(45)) == (D(45), True)
     assert apply_tmc_cap(D(40), D(45)) == (D(40), False)
-    assert select_category(Currency.CLP, D("199.99")) is RateCategory.CLP_LT_200
-    assert select_category(Currency.CLP, D(200)) is RateCategory.CLP_GTE_200
+    assert select_category(Currency.CLP, D(50)) is RateCategory.CLP_UNDER_50
+    assert select_category(Currency.CLP, D("50.01")) is RateCategory.CLP_50_TO_200
+    assert select_category(Currency.CLP, D("199.99")) is RateCategory.CLP_50_TO_200
+    assert select_category(Currency.CLP, D(200)) is RateCategory.CLP_OVER_200
     assert select_category(Currency.UF, D(5000)) is RateCategory.UF
 
 def test_validation_errors():
@@ -116,13 +133,38 @@ def test_validation_errors():
 def test_seed_file_integrity_and_unverified_flag():
     t = load_default_table()
     assert t.verified is False
-    for y in range(2021, 2027):
-        for m in range(1, 13):
-            for cat in RateCategory:
-                c, tmc = t.rate(date(y, m, 1), cat)
-                assert tmc == (c * D("1.5")).quantize(D("0.01"), "ROUND_HALF_UP")
+    prev_end = None
+    for start, end, cats in t._periods:
+        assert start <= end and (prev_end is None or start == prev_end + timedelta(days=1))
+        prev_end = end
+        assert set(cats) == {c.value for c in RateCategory}
+        assert all(c["corriente"] < c["tmc"] <= 2 * c["corriente"] for c in cats.values())
     led = calculate_day_by_day_ledger(
-        clp(issue_date=date(2024, 1, 1), maturity_date=date(2024, 3, 1),
-            cutoff_date=date(2025, 3, 1)))
+        clp(issue_date=date(2024, 1, 20), maturity_date=date(2024, 3, 20),
+            cutoff_date=date(2025, 3, 20)))
     assert any("NO verificadas" in w for w in led.warnings)
     assert sum(m.interest for m in led.months) == led.interest_native
+
+# --- external vectors (day count ACT/360, the default) ---
+A = dict(principal=D(10_000_000), currency=Currency.CLP, issue_date=date(2024, 1, 15),
+         maturity_date=date(2024, 1, 15), cutoff_date=date(2024, 3, 15))
+
+def test_vector_a_with_period2_extended_to_cutoff():
+    # 30d @14.40 = 120,000 ; 30d @13.80 = 115,000 ; total 235,000
+    led = calculate_day_by_day_ledger(LiquidationParams(**A), _q1("2024-03-15"))
+    assert (led.interest_clp, led.total_clp) == (D(235_000), D(10_235_000))
+
+def test_vector_a_with_its_own_validity_windows_differs():
+    # Period 2 ends 03-14, so 03-15 uses 13.10: 111,166.667 + 3,638.889 + 120,000 = 234,805.556
+    led = calculate_day_by_day_ledger(LiquidationParams(**A), _q1("2024-03-14"))
+    assert led.interest_clp == D(234_806)
+
+def test_vector_b_tmc_cap():
+    # 5,000,000 CLP = 138 UF -> 50-200 bracket, TMC 28.50: 5e6*28.5/36000*30 = 118,750
+    t = RateTable({"metadata": {"verified": True}, "uf_10th": UF10, "periods": [
+        _period("2024-01", "2024-01-15", "2024-02-14", _rates("21.34", "21.34", "14.40", "5.12", "28.50"))]})
+    led = calculate_day_by_day_ledger(LiquidationParams(
+        principal=D(5_000_000), currency=Currency.CLP, issue_date=date(2024, 1, 15),
+        maturity_date=date(2024, 2, 14), cutoff_date=date(2024, 2, 14), agreed_rate=D(45)), t)
+    assert led.interest_clp == D(118_750)  # uncapped would be 187,500
+    assert any("excede la TMC" in w for w in led.warnings)

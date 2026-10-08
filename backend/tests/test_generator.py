@@ -8,7 +8,7 @@ from docx import Document
 from app.engine.calculator import calculate_day_by_day_ledger
 from app.engine.legal_templates import build_lawsuit, fmt_clp, fmt_date, fmt_uf
 from app.schemas.instrument import Attorney, CourtJurisdiction, Pagare
-from app.schemas.liquidation import Currency, LiquidationParams
+from app.schemas.liquidation import Currency, DayCount, LiquidationParams
 from app.services.generator import generate_lawsuit_docx
 
 PARTY_C = {"name": "Banco Ejemplo SpA", "rut": "76.086.428-5"}
@@ -29,7 +29,7 @@ def ledger_for(p: Pagare, cutoff=date(2024, 2, 29)):
     return calculate_day_by_day_ledger(LiquidationParams(
         principal=p.amount, currency=p.currency, issue_date=p.issue_date,
         maturity_date=p.maturity_date, cutoff_date=cutoff,
-        agreed_rate=p.agreed_rate_annual), TABLE)
+        agreed_rate=p.agreed_rate_annual, day_count=DayCount.ACT_365), TABLE)
 
 
 def text_of(data: bytes) -> str:

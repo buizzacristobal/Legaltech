@@ -2,8 +2,8 @@
  "metadata": {
   "source": "ILLUSTRATIVE - NOT OFFICIAL CMF DATA",
   "verified": false,
-  "units": "annual percentage; uf_10th = UF value on the 10th of each month (start of the UF readjustment period)",
-  "note": "Replace with figures transcribed from CMF monthly publications and set verified=true before any real use."
+  "units": "annual percent; uf_10th = UF on the 10th of each month",
+  "note": "Replace with CMF-published figures (and real valid_from/valid_to) and set verified=true."
  },
  "uf_10th": {
   "2021-01": "29070.00",
@@ -80,1014 +80,1662 @@
   "2026-12": "41197.28",
   "2027-01": "41315.55"
  },
- "rates": {
-  "2021-01": {
-   "clp_lt_200": {
-    "corriente": "21.00",
-    "tmc": "31.50"
-   },
-   "clp_gte_200": {
-    "corriente": "8.50",
-    "tmc": "12.75"
-   },
-   "uf": {
-    "corriente": "3.40",
-    "tmc": "5.10"
-   }
-  },
-  "2021-02": {
-   "clp_lt_200": {
-    "corriente": "21.25",
-    "tmc": "31.88"
-   },
-   "clp_gte_200": {
-    "corriente": "8.67",
-    "tmc": "13.01"
-   },
-   "uf": {
-    "corriente": "3.47",
-    "tmc": "5.21"
-   }
-  },
-  "2021-03": {
-   "clp_lt_200": {
-    "corriente": "21.50",
-    "tmc": "32.25"
-   },
-   "clp_gte_200": {
-    "corriente": "8.83",
-    "tmc": "13.25"
-   },
-   "uf": {
-    "corriente": "3.53",
-    "tmc": "5.30"
-   }
-  },
-  "2021-04": {
-   "clp_lt_200": {
-    "corriente": "21.75",
-    "tmc": "32.63"
-   },
-   "clp_gte_200": {
-    "corriente": "9.00",
-    "tmc": "13.50"
-   },
-   "uf": {
-    "corriente": "3.60",
-    "tmc": "5.40"
-   }
-  },
-  "2021-05": {
-   "clp_lt_200": {
-    "corriente": "22.00",
-    "tmc": "33.00"
-   },
-   "clp_gte_200": {
-    "corriente": "9.17",
-    "tmc": "13.76"
-   },
-   "uf": {
-    "corriente": "3.67",
-    "tmc": "5.51"
-   }
-  },
-  "2021-06": {
-   "clp_lt_200": {
-    "corriente": "22.25",
-    "tmc": "33.38"
-   },
-   "clp_gte_200": {
-    "corriente": "9.33",
-    "tmc": "14.00"
-   },
-   "uf": {
-    "corriente": "3.73",
-    "tmc": "5.60"
-   }
-  },
-  "2021-07": {
-   "clp_lt_200": {
-    "corriente": "22.50",
-    "tmc": "33.75"
-   },
-   "clp_gte_200": {
-    "corriente": "9.50",
-    "tmc": "14.25"
-   },
-   "uf": {
-    "corriente": "3.80",
-    "tmc": "5.70"
-   }
-  },
-  "2021-08": {
-   "clp_lt_200": {
-    "corriente": "22.75",
-    "tmc": "34.13"
-   },
-   "clp_gte_200": {
-    "corriente": "9.67",
-    "tmc": "14.51"
-   },
-   "uf": {
-    "corriente": "3.87",
-    "tmc": "5.81"
-   }
-  },
-  "2021-09": {
-   "clp_lt_200": {
-    "corriente": "23.00",
-    "tmc": "34.50"
-   },
-   "clp_gte_200": {
-    "corriente": "9.83",
-    "tmc": "14.75"
-   },
-   "uf": {
-    "corriente": "3.93",
-    "tmc": "5.90"
-   }
-  },
-  "2021-10": {
-   "clp_lt_200": {
-    "corriente": "23.25",
-    "tmc": "34.88"
-   },
-   "clp_gte_200": {
-    "corriente": "10.00",
-    "tmc": "15.00"
-   },
-   "uf": {
-    "corriente": "4.00",
-    "tmc": "6.00"
-   }
-  },
-  "2021-11": {
-   "clp_lt_200": {
-    "corriente": "23.50",
-    "tmc": "35.25"
-   },
-   "clp_gte_200": {
-    "corriente": "10.17",
-    "tmc": "15.26"
-   },
-   "uf": {
-    "corriente": "4.07",
-    "tmc": "6.11"
-   }
-  },
-  "2021-12": {
-   "clp_lt_200": {
-    "corriente": "23.75",
-    "tmc": "35.63"
-   },
-   "clp_gte_200": {
-    "corriente": "10.33",
-    "tmc": "15.50"
-   },
-   "uf": {
-    "corriente": "4.13",
-    "tmc": "6.20"
-   }
-  },
-  "2022-01": {
-   "clp_lt_200": {
-    "corriente": "24.00",
-    "tmc": "36.00"
-   },
-   "clp_gte_200": {
-    "corriente": "10.50",
-    "tmc": "15.75"
-   },
-   "uf": {
-    "corriente": "4.20",
-    "tmc": "6.30"
-   }
-  },
-  "2022-02": {
-   "clp_lt_200": {
-    "corriente": "25.33",
-    "tmc": "38.00"
-   },
-   "clp_gte_200": {
-    "corriente": "11.25",
-    "tmc": "16.88"
-   },
-   "uf": {
-    "corriente": "4.47",
-    "tmc": "6.71"
-   }
-  },
-  "2022-03": {
-   "clp_lt_200": {
-    "corriente": "26.67",
-    "tmc": "40.01"
-   },
-   "clp_gte_200": {
-    "corriente": "12.00",
-    "tmc": "18.00"
-   },
-   "uf": {
-    "corriente": "4.73",
-    "tmc": "7.10"
-   }
-  },
-  "2022-04": {
-   "clp_lt_200": {
-    "corriente": "28.00",
-    "tmc": "42.00"
-   },
-   "clp_gte_200": {
-    "corriente": "12.75",
-    "tmc": "19.13"
-   },
-   "uf": {
-    "corriente": "5.00",
-    "tmc": "7.50"
-   }
-  },
-  "2022-05": {
-   "clp_lt_200": {
-    "corriente": "29.33",
-    "tmc": "44.00"
-   },
-   "clp_gte_200": {
-    "corriente": "13.50",
-    "tmc": "20.25"
-   },
-   "uf": {
-    "corriente": "5.27",
-    "tmc": "7.91"
-   }
-  },
-  "2022-06": {
-   "clp_lt_200": {
-    "corriente": "30.67",
-    "tmc": "46.01"
-   },
-   "clp_gte_200": {
-    "corriente": "14.25",
-    "tmc": "21.38"
-   },
-   "uf": {
-    "corriente": "5.53",
-    "tmc": "8.30"
-   }
-  },
-  "2022-07": {
-   "clp_lt_200": {
-    "corriente": "32.00",
-    "tmc": "48.00"
-   },
-   "clp_gte_200": {
-    "corriente": "15.00",
-    "tmc": "22.50"
-   },
-   "uf": {
-    "corriente": "5.80",
-    "tmc": "8.70"
-   }
-  },
-  "2022-08": {
-   "clp_lt_200": {
-    "corriente": "33.00",
-    "tmc": "49.50"
-   },
-   "clp_gte_200": {
-    "corriente": "15.42",
-    "tmc": "23.13"
-   },
-   "uf": {
-    "corriente": "5.93",
-    "tmc": "8.90"
-   }
-  },
-  "2022-09": {
-   "clp_lt_200": {
-    "corriente": "34.00",
-    "tmc": "51.00"
-   },
-   "clp_gte_200": {
-    "corriente": "15.83",
-    "tmc": "23.75"
-   },
-   "uf": {
-    "corriente": "6.07",
-    "tmc": "9.11"
-   }
-  },
-  "2022-10": {
-   "clp_lt_200": {
-    "corriente": "35.00",
-    "tmc": "52.50"
-   },
-   "clp_gte_200": {
-    "corriente": "16.25",
-    "tmc": "24.38"
-   },
-   "uf": {
-    "corriente": "6.20",
-    "tmc": "9.30"
-   }
-  },
-  "2022-11": {
-   "clp_lt_200": {
-    "corriente": "36.00",
-    "tmc": "54.00"
-   },
-   "clp_gte_200": {
-    "corriente": "16.67",
-    "tmc": "25.01"
-   },
-   "uf": {
-    "corriente": "6.33",
-    "tmc": "9.50"
-   }
-  },
-  "2022-12": {
-   "clp_lt_200": {
-    "corriente": "37.00",
-    "tmc": "55.50"
-   },
-   "clp_gte_200": {
-    "corriente": "17.08",
-    "tmc": "25.62"
-   },
-   "uf": {
-    "corriente": "6.47",
-    "tmc": "9.71"
-   }
-  },
-  "2023-01": {
-   "clp_lt_200": {
-    "corriente": "38.00",
-    "tmc": "57.00"
-   },
-   "clp_gte_200": {
-    "corriente": "17.50",
-    "tmc": "26.25"
-   },
-   "uf": {
-    "corriente": "6.60",
-    "tmc": "9.90"
-   }
-  },
-  "2023-02": {
-   "clp_lt_200": {
-    "corriente": "37.67",
-    "tmc": "56.51"
-   },
-   "clp_gte_200": {
-    "corriente": "17.25",
-    "tmc": "25.88"
-   },
-   "uf": {
-    "corriente": "6.53",
-    "tmc": "9.80"
-   }
-  },
-  "2023-03": {
-   "clp_lt_200": {
-    "corriente": "37.33",
-    "tmc": "56.00"
-   },
-   "clp_gte_200": {
-    "corriente": "17.00",
-    "tmc": "25.50"
-   },
-   "uf": {
-    "corriente": "6.47",
-    "tmc": "9.71"
-   }
-  },
-  "2023-04": {
-   "clp_lt_200": {
-    "corriente": "37.00",
-    "tmc": "55.50"
-   },
-   "clp_gte_200": {
-    "corriente": "16.75",
-    "tmc": "25.13"
-   },
-   "uf": {
-    "corriente": "6.40",
-    "tmc": "9.60"
-   }
-  },
-  "2023-05": {
-   "clp_lt_200": {
-    "corriente": "36.67",
-    "tmc": "55.01"
-   },
-   "clp_gte_200": {
-    "corriente": "16.50",
-    "tmc": "24.75"
-   },
-   "uf": {
-    "corriente": "6.33",
-    "tmc": "9.50"
-   }
-  },
-  "2023-06": {
-   "clp_lt_200": {
-    "corriente": "36.33",
-    "tmc": "54.50"
-   },
-   "clp_gte_200": {
-    "corriente": "16.25",
-    "tmc": "24.38"
-   },
-   "uf": {
-    "corriente": "6.27",
-    "tmc": "9.41"
-   }
-  },
-  "2023-07": {
-   "clp_lt_200": {
-    "corriente": "36.00",
-    "tmc": "54.00"
-   },
-   "clp_gte_200": {
-    "corriente": "16.00",
-    "tmc": "24.00"
-   },
-   "uf": {
-    "corriente": "6.20",
-    "tmc": "9.30"
-   }
-  },
-  "2023-08": {
-   "clp_lt_200": {
-    "corriente": "35.42",
-    "tmc": "53.13"
-   },
-   "clp_gte_200": {
-    "corriente": "15.58",
-    "tmc": "23.37"
-   },
-   "uf": {
-    "corriente": "6.05",
-    "tmc": "9.08"
-   }
-  },
-  "2023-09": {
-   "clp_lt_200": {
-    "corriente": "34.83",
-    "tmc": "52.25"
-   },
-   "clp_gte_200": {
-    "corriente": "15.17",
-    "tmc": "22.76"
-   },
-   "uf": {
-    "corriente": "5.90",
-    "tmc": "8.85"
-   }
-  },
-  "2023-10": {
-   "clp_lt_200": {
-    "corriente": "34.25",
-    "tmc": "51.38"
-   },
-   "clp_gte_200": {
-    "corriente": "14.75",
-    "tmc": "22.13"
-   },
-   "uf": {
-    "corriente": "5.75",
-    "tmc": "8.63"
-   }
-  },
-  "2023-11": {
-   "clp_lt_200": {
-    "corriente": "33.67",
-    "tmc": "50.51"
-   },
-   "clp_gte_200": {
-    "corriente": "14.33",
-    "tmc": "21.50"
-   },
-   "uf": {
-    "corriente": "5.60",
-    "tmc": "8.40"
-   }
-  },
-  "2023-12": {
-   "clp_lt_200": {
-    "corriente": "33.08",
-    "tmc": "49.62"
-   },
-   "clp_gte_200": {
-    "corriente": "13.92",
-    "tmc": "20.88"
-   },
-   "uf": {
-    "corriente": "5.45",
-    "tmc": "8.18"
-   }
-  },
-  "2024-01": {
-   "clp_lt_200": {
-    "corriente": "32.50",
-    "tmc": "48.75"
-   },
-   "clp_gte_200": {
-    "corriente": "13.50",
-    "tmc": "20.25"
-   },
-   "uf": {
-    "corriente": "5.30",
-    "tmc": "7.95"
-   }
-  },
-  "2024-02": {
-   "clp_lt_200": {
-    "corriente": "32.17",
-    "tmc": "48.26"
-   },
-   "clp_gte_200": {
-    "corriente": "13.33",
-    "tmc": "20.00"
-   },
-   "uf": {
-    "corriente": "5.25",
-    "tmc": "7.88"
-   }
-  },
-  "2024-03": {
-   "clp_lt_200": {
-    "corriente": "31.83",
-    "tmc": "47.75"
-   },
-   "clp_gte_200": {
-    "corriente": "13.17",
-    "tmc": "19.76"
-   },
-   "uf": {
-    "corriente": "5.20",
-    "tmc": "7.80"
-   }
-  },
-  "2024-04": {
-   "clp_lt_200": {
-    "corriente": "31.50",
-    "tmc": "47.25"
-   },
-   "clp_gte_200": {
-    "corriente": "13.00",
-    "tmc": "19.50"
-   },
-   "uf": {
-    "corriente": "5.15",
-    "tmc": "7.73"
-   }
-  },
-  "2024-05": {
-   "clp_lt_200": {
-    "corriente": "31.17",
-    "tmc": "46.76"
-   },
-   "clp_gte_200": {
-    "corriente": "12.83",
-    "tmc": "19.25"
-   },
-   "uf": {
-    "corriente": "5.10",
-    "tmc": "7.65"
-   }
-  },
-  "2024-06": {
-   "clp_lt_200": {
-    "corriente": "30.83",
-    "tmc": "46.25"
-   },
-   "clp_gte_200": {
-    "corriente": "12.67",
-    "tmc": "19.01"
-   },
-   "uf": {
-    "corriente": "5.05",
-    "tmc": "7.58"
-   }
-  },
-  "2024-07": {
-   "clp_lt_200": {
-    "corriente": "30.50",
-    "tmc": "45.75"
-   },
-   "clp_gte_200": {
-    "corriente": "12.50",
-    "tmc": "18.75"
-   },
-   "uf": {
-    "corriente": "5.00",
-    "tmc": "7.50"
-   }
-  },
-  "2024-08": {
-   "clp_lt_200": {
-    "corriente": "30.33",
-    "tmc": "45.50"
-   },
-   "clp_gte_200": {
-    "corriente": "12.42",
-    "tmc": "18.63"
-   },
-   "uf": {
-    "corriente": "4.97",
-    "tmc": "7.46"
-   }
-  },
-  "2024-09": {
-   "clp_lt_200": {
-    "corriente": "30.17",
-    "tmc": "45.26"
-   },
-   "clp_gte_200": {
-    "corriente": "12.33",
-    "tmc": "18.50"
-   },
-   "uf": {
-    "corriente": "4.93",
-    "tmc": "7.40"
-   }
-  },
-  "2024-10": {
-   "clp_lt_200": {
-    "corriente": "30.00",
-    "tmc": "45.00"
-   },
-   "clp_gte_200": {
-    "corriente": "12.25",
-    "tmc": "18.38"
-   },
-   "uf": {
-    "corriente": "4.90",
-    "tmc": "7.35"
-   }
-  },
-  "2024-11": {
-   "clp_lt_200": {
-    "corriente": "29.83",
-    "tmc": "44.75"
-   },
-   "clp_gte_200": {
-    "corriente": "12.17",
-    "tmc": "18.26"
-   },
-   "uf": {
-    "corriente": "4.87",
-    "tmc": "7.31"
-   }
-  },
-  "2024-12": {
-   "clp_lt_200": {
-    "corriente": "29.67",
-    "tmc": "44.51"
-   },
-   "clp_gte_200": {
-    "corriente": "12.08",
-    "tmc": "18.12"
-   },
-   "uf": {
-    "corriente": "4.83",
-    "tmc": "7.25"
-   }
-  },
-  "2025-01": {
-   "clp_lt_200": {
-    "corriente": "29.50",
-    "tmc": "44.25"
-   },
-   "clp_gte_200": {
-    "corriente": "12.00",
-    "tmc": "18.00"
-   },
-   "uf": {
-    "corriente": "4.80",
-    "tmc": "7.20"
-   }
-  },
-  "2025-02": {
-   "clp_lt_200": {
-    "corriente": "29.33",
-    "tmc": "44.00"
-   },
-   "clp_gte_200": {
-    "corriente": "11.92",
-    "tmc": "17.88"
-   },
-   "uf": {
-    "corriente": "4.77",
-    "tmc": "7.16"
-   }
-  },
-  "2025-03": {
-   "clp_lt_200": {
-    "corriente": "29.17",
-    "tmc": "43.76"
-   },
-   "clp_gte_200": {
-    "corriente": "11.83",
-    "tmc": "17.75"
-   },
-   "uf": {
-    "corriente": "4.73",
-    "tmc": "7.10"
-   }
-  },
-  "2025-04": {
-   "clp_lt_200": {
-    "corriente": "29.00",
-    "tmc": "43.50"
-   },
-   "clp_gte_200": {
-    "corriente": "11.75",
-    "tmc": "17.63"
-   },
-   "uf": {
-    "corriente": "4.70",
-    "tmc": "7.05"
-   }
-  },
-  "2025-05": {
-   "clp_lt_200": {
-    "corriente": "28.83",
-    "tmc": "43.25"
-   },
-   "clp_gte_200": {
-    "corriente": "11.67",
-    "tmc": "17.51"
-   },
-   "uf": {
-    "corriente": "4.67",
-    "tmc": "7.01"
-   }
-  },
-  "2025-06": {
-   "clp_lt_200": {
-    "corriente": "28.67",
-    "tmc": "43.01"
-   },
-   "clp_gte_200": {
-    "corriente": "11.58",
-    "tmc": "17.37"
-   },
-   "uf": {
-    "corriente": "4.63",
-    "tmc": "6.95"
-   }
-  },
-  "2025-07": {
-   "clp_lt_200": {
-    "corriente": "28.50",
-    "tmc": "42.75"
-   },
-   "clp_gte_200": {
-    "corriente": "11.50",
-    "tmc": "17.25"
-   },
-   "uf": {
-    "corriente": "4.60",
-    "tmc": "6.90"
-   }
-  },
-  "2025-08": {
-   "clp_lt_200": {
-    "corriente": "28.33",
-    "tmc": "42.50"
-   },
-   "clp_gte_200": {
-    "corriente": "11.42",
-    "tmc": "17.13"
-   },
-   "uf": {
-    "corriente": "4.57",
-    "tmc": "6.86"
-   }
-  },
-  "2025-09": {
-   "clp_lt_200": {
-    "corriente": "28.17",
-    "tmc": "42.26"
-   },
-   "clp_gte_200": {
-    "corriente": "11.33",
-    "tmc": "17.00"
-   },
-   "uf": {
-    "corriente": "4.53",
-    "tmc": "6.80"
-   }
-  },
-  "2025-10": {
-   "clp_lt_200": {
-    "corriente": "28.00",
-    "tmc": "42.00"
-   },
-   "clp_gte_200": {
-    "corriente": "11.25",
-    "tmc": "16.88"
-   },
-   "uf": {
-    "corriente": "4.50",
-    "tmc": "6.75"
-   }
-  },
-  "2025-11": {
-   "clp_lt_200": {
-    "corriente": "27.83",
-    "tmc": "41.75"
-   },
-   "clp_gte_200": {
-    "corriente": "11.17",
-    "tmc": "16.76"
-   },
-   "uf": {
-    "corriente": "4.47",
-    "tmc": "6.71"
-   }
-  },
-  "2025-12": {
-   "clp_lt_200": {
-    "corriente": "27.67",
-    "tmc": "41.51"
-   },
-   "clp_gte_200": {
-    "corriente": "11.08",
-    "tmc": "16.62"
-   },
-   "uf": {
-    "corriente": "4.43",
-    "tmc": "6.65"
-   }
-  },
-  "2026-01": {
-   "clp_lt_200": {
-    "corriente": "27.50",
-    "tmc": "41.25"
-   },
-   "clp_gte_200": {
-    "corriente": "11.00",
-    "tmc": "16.50"
-   },
-   "uf": {
-    "corriente": "4.40",
-    "tmc": "6.60"
-   }
-  },
-  "2026-02": {
-   "clp_lt_200": {
-    "corriente": "27.45",
-    "tmc": "41.18"
-   },
-   "clp_gte_200": {
-    "corriente": "10.98",
-    "tmc": "16.47"
-   },
-   "uf": {
-    "corriente": "4.39",
-    "tmc": "6.59"
-   }
-  },
-  "2026-03": {
-   "clp_lt_200": {
-    "corriente": "27.41",
-    "tmc": "41.12"
-   },
-   "clp_gte_200": {
-    "corriente": "10.96",
-    "tmc": "16.44"
-   },
-   "uf": {
-    "corriente": "4.38",
-    "tmc": "6.57"
-   }
-  },
-  "2026-04": {
-   "clp_lt_200": {
-    "corriente": "27.36",
-    "tmc": "41.04"
-   },
-   "clp_gte_200": {
-    "corriente": "10.95",
-    "tmc": "16.43"
-   },
-   "uf": {
-    "corriente": "4.37",
-    "tmc": "6.56"
-   }
-  },
-  "2026-05": {
-   "clp_lt_200": {
-    "corriente": "27.32",
-    "tmc": "40.98"
-   },
-   "clp_gte_200": {
-    "corriente": "10.93",
-    "tmc": "16.40"
-   },
-   "uf": {
-    "corriente": "4.36",
-    "tmc": "6.54"
-   }
-  },
-  "2026-06": {
-   "clp_lt_200": {
-    "corriente": "27.27",
-    "tmc": "40.91"
-   },
-   "clp_gte_200": {
-    "corriente": "10.91",
-    "tmc": "16.37"
-   },
-   "uf": {
-    "corriente": "4.35",
-    "tmc": "6.53"
-   }
-  },
-  "2026-07": {
-   "clp_lt_200": {
-    "corriente": "27.23",
-    "tmc": "40.85"
-   },
-   "clp_gte_200": {
-    "corriente": "10.89",
-    "tmc": "16.34"
-   },
-   "uf": {
-    "corriente": "4.35",
-    "tmc": "6.53"
-   }
-  },
-  "2026-08": {
-   "clp_lt_200": {
-    "corriente": "27.18",
-    "tmc": "40.77"
-   },
-   "clp_gte_200": {
-    "corriente": "10.87",
-    "tmc": "16.31"
-   },
-   "uf": {
-    "corriente": "4.34",
-    "tmc": "6.51"
-   }
-  },
-  "2026-09": {
-   "clp_lt_200": {
-    "corriente": "27.14",
-    "tmc": "40.71"
-   },
-   "clp_gte_200": {
-    "corriente": "10.85",
-    "tmc": "16.28"
-   },
-   "uf": {
-    "corriente": "4.33",
-    "tmc": "6.50"
-   }
-  },
-  "2026-10": {
-   "clp_lt_200": {
-    "corriente": "27.09",
-    "tmc": "40.64"
-   },
-   "clp_gte_200": {
-    "corriente": "10.84",
-    "tmc": "16.26"
-   },
-   "uf": {
-    "corriente": "4.32",
-    "tmc": "6.48"
-   }
-  },
-  "2026-11": {
-   "clp_lt_200": {
-    "corriente": "27.05",
-    "tmc": "40.58"
-   },
-   "clp_gte_200": {
-    "corriente": "10.82",
-    "tmc": "16.23"
-   },
-   "uf": {
-    "corriente": "4.31",
-    "tmc": "6.47"
-   }
-  },
-  "2026-12": {
-   "clp_lt_200": {
-    "corriente": "27.00",
-    "tmc": "40.50"
-   },
-   "clp_gte_200": {
-    "corriente": "10.80",
-    "tmc": "16.20"
-   },
-   "uf": {
-    "corriente": "4.30",
-    "tmc": "6.45"
+ "periods": [
+  {
+   "period_id": "2021-01",
+   "valid_from": "2021-01-15",
+   "valid_to": "2021-02-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "24.15",
+     "tmc": "36.23"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "21.00",
+     "tmc": "31.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "8.50",
+     "tmc": "12.75"
+    },
+    "reajustable_uf_all": {
+     "corriente": "3.40",
+     "tmc": "5.10"
+    }
+   }
+  },
+  {
+   "period_id": "2021-02",
+   "valid_from": "2021-02-15",
+   "valid_to": "2021-03-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "24.44",
+     "tmc": "36.66"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "21.25",
+     "tmc": "31.88"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "8.67",
+     "tmc": "13.01"
+    },
+    "reajustable_uf_all": {
+     "corriente": "3.47",
+     "tmc": "5.21"
+    }
+   }
+  },
+  {
+   "period_id": "2021-03",
+   "valid_from": "2021-03-15",
+   "valid_to": "2021-04-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "24.72",
+     "tmc": "37.08"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "21.50",
+     "tmc": "32.25"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "8.83",
+     "tmc": "13.25"
+    },
+    "reajustable_uf_all": {
+     "corriente": "3.53",
+     "tmc": "5.30"
+    }
+   }
+  },
+  {
+   "period_id": "2021-04",
+   "valid_from": "2021-04-15",
+   "valid_to": "2021-05-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "25.01",
+     "tmc": "37.52"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "21.75",
+     "tmc": "32.63"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "9.00",
+     "tmc": "13.50"
+    },
+    "reajustable_uf_all": {
+     "corriente": "3.60",
+     "tmc": "5.40"
+    }
+   }
+  },
+  {
+   "period_id": "2021-05",
+   "valid_from": "2021-05-15",
+   "valid_to": "2021-06-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "25.30",
+     "tmc": "37.95"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "22.00",
+     "tmc": "33.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "9.17",
+     "tmc": "13.76"
+    },
+    "reajustable_uf_all": {
+     "corriente": "3.67",
+     "tmc": "5.51"
+    }
+   }
+  },
+  {
+   "period_id": "2021-06",
+   "valid_from": "2021-06-15",
+   "valid_to": "2021-07-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "25.59",
+     "tmc": "38.39"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "22.25",
+     "tmc": "33.38"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "9.33",
+     "tmc": "14.00"
+    },
+    "reajustable_uf_all": {
+     "corriente": "3.73",
+     "tmc": "5.60"
+    }
+   }
+  },
+  {
+   "period_id": "2021-07",
+   "valid_from": "2021-07-15",
+   "valid_to": "2021-08-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "25.87",
+     "tmc": "38.81"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "22.50",
+     "tmc": "33.75"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "9.50",
+     "tmc": "14.25"
+    },
+    "reajustable_uf_all": {
+     "corriente": "3.80",
+     "tmc": "5.70"
+    }
+   }
+  },
+  {
+   "period_id": "2021-08",
+   "valid_from": "2021-08-15",
+   "valid_to": "2021-09-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "26.16",
+     "tmc": "39.24"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "22.75",
+     "tmc": "34.13"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "9.67",
+     "tmc": "14.51"
+    },
+    "reajustable_uf_all": {
+     "corriente": "3.87",
+     "tmc": "5.81"
+    }
+   }
+  },
+  {
+   "period_id": "2021-09",
+   "valid_from": "2021-09-15",
+   "valid_to": "2021-10-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "26.45",
+     "tmc": "39.68"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "23.00",
+     "tmc": "34.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "9.83",
+     "tmc": "14.75"
+    },
+    "reajustable_uf_all": {
+     "corriente": "3.93",
+     "tmc": "5.90"
+    }
+   }
+  },
+  {
+   "period_id": "2021-10",
+   "valid_from": "2021-10-15",
+   "valid_to": "2021-11-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "26.74",
+     "tmc": "40.11"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "23.25",
+     "tmc": "34.88"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.00",
+     "tmc": "15.00"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.00",
+     "tmc": "6.00"
+    }
+   }
+  },
+  {
+   "period_id": "2021-11",
+   "valid_from": "2021-11-15",
+   "valid_to": "2021-12-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "27.03",
+     "tmc": "40.55"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "23.50",
+     "tmc": "35.25"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.17",
+     "tmc": "15.26"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.07",
+     "tmc": "6.11"
+    }
+   }
+  },
+  {
+   "period_id": "2021-12",
+   "valid_from": "2021-12-15",
+   "valid_to": "2022-01-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "27.31",
+     "tmc": "40.97"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "23.75",
+     "tmc": "35.63"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.33",
+     "tmc": "15.50"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.13",
+     "tmc": "6.20"
+    }
+   }
+  },
+  {
+   "period_id": "2022-01",
+   "valid_from": "2022-01-15",
+   "valid_to": "2022-02-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "27.60",
+     "tmc": "41.40"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "24.00",
+     "tmc": "36.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.50",
+     "tmc": "15.75"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.20",
+     "tmc": "6.30"
+    }
+   }
+  },
+  {
+   "period_id": "2022-02",
+   "valid_from": "2022-02-15",
+   "valid_to": "2022-03-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "29.13",
+     "tmc": "43.70"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "25.33",
+     "tmc": "38.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.25",
+     "tmc": "16.88"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.47",
+     "tmc": "6.71"
+    }
+   }
+  },
+  {
+   "period_id": "2022-03",
+   "valid_from": "2022-03-15",
+   "valid_to": "2022-04-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "30.67",
+     "tmc": "46.01"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "26.67",
+     "tmc": "40.01"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.00",
+     "tmc": "18.00"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.73",
+     "tmc": "7.10"
+    }
+   }
+  },
+  {
+   "period_id": "2022-04",
+   "valid_from": "2022-04-15",
+   "valid_to": "2022-05-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "32.20",
+     "tmc": "48.30"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "28.00",
+     "tmc": "42.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.75",
+     "tmc": "19.13"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.00",
+     "tmc": "7.50"
+    }
+   }
+  },
+  {
+   "period_id": "2022-05",
+   "valid_from": "2022-05-15",
+   "valid_to": "2022-06-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "33.73",
+     "tmc": "50.60"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "29.33",
+     "tmc": "44.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "13.50",
+     "tmc": "20.25"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.27",
+     "tmc": "7.91"
+    }
+   }
+  },
+  {
+   "period_id": "2022-06",
+   "valid_from": "2022-06-15",
+   "valid_to": "2022-07-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "35.27",
+     "tmc": "52.91"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "30.67",
+     "tmc": "46.01"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "14.25",
+     "tmc": "21.38"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.53",
+     "tmc": "8.30"
+    }
+   }
+  },
+  {
+   "period_id": "2022-07",
+   "valid_from": "2022-07-15",
+   "valid_to": "2022-08-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "36.80",
+     "tmc": "55.20"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "32.00",
+     "tmc": "48.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "15.00",
+     "tmc": "22.50"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.80",
+     "tmc": "8.70"
+    }
+   }
+  },
+  {
+   "period_id": "2022-08",
+   "valid_from": "2022-08-15",
+   "valid_to": "2022-09-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "37.95",
+     "tmc": "56.93"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "33.00",
+     "tmc": "49.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "15.42",
+     "tmc": "23.13"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.93",
+     "tmc": "8.90"
+    }
+   }
+  },
+  {
+   "period_id": "2022-09",
+   "valid_from": "2022-09-15",
+   "valid_to": "2022-10-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "39.10",
+     "tmc": "58.65"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "34.00",
+     "tmc": "51.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "15.83",
+     "tmc": "23.75"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.07",
+     "tmc": "9.11"
+    }
+   }
+  },
+  {
+   "period_id": "2022-10",
+   "valid_from": "2022-10-15",
+   "valid_to": "2022-11-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "40.25",
+     "tmc": "60.38"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "35.00",
+     "tmc": "52.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "16.25",
+     "tmc": "24.38"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.20",
+     "tmc": "9.30"
+    }
+   }
+  },
+  {
+   "period_id": "2022-11",
+   "valid_from": "2022-11-15",
+   "valid_to": "2022-12-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "41.40",
+     "tmc": "62.10"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "36.00",
+     "tmc": "54.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "16.67",
+     "tmc": "25.01"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.33",
+     "tmc": "9.50"
+    }
+   }
+  },
+  {
+   "period_id": "2022-12",
+   "valid_from": "2022-12-15",
+   "valid_to": "2023-01-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "42.55",
+     "tmc": "63.83"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "37.00",
+     "tmc": "55.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "17.08",
+     "tmc": "25.62"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.47",
+     "tmc": "9.71"
+    }
+   }
+  },
+  {
+   "period_id": "2023-01",
+   "valid_from": "2023-01-15",
+   "valid_to": "2023-02-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "43.70",
+     "tmc": "65.55"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "38.00",
+     "tmc": "57.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "17.50",
+     "tmc": "26.25"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.60",
+     "tmc": "9.90"
+    }
+   }
+  },
+  {
+   "period_id": "2023-02",
+   "valid_from": "2023-02-15",
+   "valid_to": "2023-03-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "43.32",
+     "tmc": "64.98"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "37.67",
+     "tmc": "56.51"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "17.25",
+     "tmc": "25.88"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.53",
+     "tmc": "9.80"
+    }
+   }
+  },
+  {
+   "period_id": "2023-03",
+   "valid_from": "2023-03-15",
+   "valid_to": "2023-04-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "42.93",
+     "tmc": "64.40"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "37.33",
+     "tmc": "56.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "17.00",
+     "tmc": "25.50"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.47",
+     "tmc": "9.71"
+    }
+   }
+  },
+  {
+   "period_id": "2023-04",
+   "valid_from": "2023-04-15",
+   "valid_to": "2023-05-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "42.55",
+     "tmc": "63.83"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "37.00",
+     "tmc": "55.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "16.75",
+     "tmc": "25.13"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.40",
+     "tmc": "9.60"
+    }
+   }
+  },
+  {
+   "period_id": "2023-05",
+   "valid_from": "2023-05-15",
+   "valid_to": "2023-06-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "42.17",
+     "tmc": "63.26"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "36.67",
+     "tmc": "55.01"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "16.50",
+     "tmc": "24.75"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.33",
+     "tmc": "9.50"
+    }
+   }
+  },
+  {
+   "period_id": "2023-06",
+   "valid_from": "2023-06-15",
+   "valid_to": "2023-07-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "41.78",
+     "tmc": "62.67"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "36.33",
+     "tmc": "54.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "16.25",
+     "tmc": "24.38"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.27",
+     "tmc": "9.41"
+    }
+   }
+  },
+  {
+   "period_id": "2023-07",
+   "valid_from": "2023-07-15",
+   "valid_to": "2023-08-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "41.40",
+     "tmc": "62.10"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "36.00",
+     "tmc": "54.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "16.00",
+     "tmc": "24.00"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.20",
+     "tmc": "9.30"
+    }
+   }
+  },
+  {
+   "period_id": "2023-08",
+   "valid_from": "2023-08-15",
+   "valid_to": "2023-09-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "40.73",
+     "tmc": "61.10"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "35.42",
+     "tmc": "53.13"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "15.58",
+     "tmc": "23.37"
+    },
+    "reajustable_uf_all": {
+     "corriente": "6.05",
+     "tmc": "9.08"
+    }
+   }
+  },
+  {
+   "period_id": "2023-09",
+   "valid_from": "2023-09-15",
+   "valid_to": "2023-10-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "40.06",
+     "tmc": "60.09"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "34.83",
+     "tmc": "52.25"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "15.17",
+     "tmc": "22.76"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.90",
+     "tmc": "8.85"
+    }
+   }
+  },
+  {
+   "period_id": "2023-10",
+   "valid_from": "2023-10-15",
+   "valid_to": "2023-11-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "39.39",
+     "tmc": "59.09"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "34.25",
+     "tmc": "51.38"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "14.75",
+     "tmc": "22.13"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.75",
+     "tmc": "8.63"
+    }
+   }
+  },
+  {
+   "period_id": "2023-11",
+   "valid_from": "2023-11-15",
+   "valid_to": "2023-12-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "38.72",
+     "tmc": "58.08"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "33.67",
+     "tmc": "50.51"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "14.33",
+     "tmc": "21.50"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.60",
+     "tmc": "8.40"
+    }
+   }
+  },
+  {
+   "period_id": "2023-12",
+   "valid_from": "2023-12-15",
+   "valid_to": "2024-01-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "38.05",
+     "tmc": "57.08"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "33.08",
+     "tmc": "49.62"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "13.92",
+     "tmc": "20.88"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.45",
+     "tmc": "8.18"
+    }
+   }
+  },
+  {
+   "period_id": "2024-01",
+   "valid_from": "2024-01-15",
+   "valid_to": "2024-02-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "37.38",
+     "tmc": "56.07"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "32.50",
+     "tmc": "48.75"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "13.50",
+     "tmc": "20.25"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.30",
+     "tmc": "7.95"
+    }
+   }
+  },
+  {
+   "period_id": "2024-02",
+   "valid_from": "2024-02-15",
+   "valid_to": "2024-03-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "36.99",
+     "tmc": "55.49"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "32.17",
+     "tmc": "48.26"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "13.33",
+     "tmc": "20.00"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.25",
+     "tmc": "7.88"
+    }
+   }
+  },
+  {
+   "period_id": "2024-03",
+   "valid_from": "2024-03-15",
+   "valid_to": "2024-04-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "36.61",
+     "tmc": "54.92"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "31.83",
+     "tmc": "47.75"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "13.17",
+     "tmc": "19.76"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.20",
+     "tmc": "7.80"
+    }
+   }
+  },
+  {
+   "period_id": "2024-04",
+   "valid_from": "2024-04-15",
+   "valid_to": "2024-05-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "36.22",
+     "tmc": "54.33"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "31.50",
+     "tmc": "47.25"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "13.00",
+     "tmc": "19.50"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.15",
+     "tmc": "7.73"
+    }
+   }
+  },
+  {
+   "period_id": "2024-05",
+   "valid_from": "2024-05-15",
+   "valid_to": "2024-06-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "35.84",
+     "tmc": "53.76"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "31.17",
+     "tmc": "46.76"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.83",
+     "tmc": "19.25"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.10",
+     "tmc": "7.65"
+    }
+   }
+  },
+  {
+   "period_id": "2024-06",
+   "valid_from": "2024-06-15",
+   "valid_to": "2024-07-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "35.46",
+     "tmc": "53.19"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "30.83",
+     "tmc": "46.25"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.67",
+     "tmc": "19.01"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.05",
+     "tmc": "7.58"
+    }
+   }
+  },
+  {
+   "period_id": "2024-07",
+   "valid_from": "2024-07-15",
+   "valid_to": "2024-08-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "35.07",
+     "tmc": "52.61"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "30.50",
+     "tmc": "45.75"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.50",
+     "tmc": "18.75"
+    },
+    "reajustable_uf_all": {
+     "corriente": "5.00",
+     "tmc": "7.50"
+    }
+   }
+  },
+  {
+   "period_id": "2024-08",
+   "valid_from": "2024-08-15",
+   "valid_to": "2024-09-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "34.88",
+     "tmc": "52.32"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "30.33",
+     "tmc": "45.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.42",
+     "tmc": "18.63"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.97",
+     "tmc": "7.46"
+    }
+   }
+  },
+  {
+   "period_id": "2024-09",
+   "valid_from": "2024-09-15",
+   "valid_to": "2024-10-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "34.69",
+     "tmc": "52.04"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "30.17",
+     "tmc": "45.26"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.33",
+     "tmc": "18.50"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.93",
+     "tmc": "7.40"
+    }
+   }
+  },
+  {
+   "period_id": "2024-10",
+   "valid_from": "2024-10-15",
+   "valid_to": "2024-11-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "34.50",
+     "tmc": "51.75"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "30.00",
+     "tmc": "45.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.25",
+     "tmc": "18.38"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.90",
+     "tmc": "7.35"
+    }
+   }
+  },
+  {
+   "period_id": "2024-11",
+   "valid_from": "2024-11-15",
+   "valid_to": "2024-12-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "34.31",
+     "tmc": "51.47"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "29.83",
+     "tmc": "44.75"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.17",
+     "tmc": "18.26"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.87",
+     "tmc": "7.31"
+    }
+   }
+  },
+  {
+   "period_id": "2024-12",
+   "valid_from": "2024-12-15",
+   "valid_to": "2025-01-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "34.12",
+     "tmc": "51.18"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "29.67",
+     "tmc": "44.51"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.08",
+     "tmc": "18.12"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.83",
+     "tmc": "7.25"
+    }
+   }
+  },
+  {
+   "period_id": "2025-01",
+   "valid_from": "2025-01-15",
+   "valid_to": "2025-02-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "33.93",
+     "tmc": "50.90"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "29.50",
+     "tmc": "44.25"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "12.00",
+     "tmc": "18.00"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.80",
+     "tmc": "7.20"
+    }
+   }
+  },
+  {
+   "period_id": "2025-02",
+   "valid_from": "2025-02-15",
+   "valid_to": "2025-03-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "33.73",
+     "tmc": "50.60"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "29.33",
+     "tmc": "44.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.92",
+     "tmc": "17.88"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.77",
+     "tmc": "7.16"
+    }
+   }
+  },
+  {
+   "period_id": "2025-03",
+   "valid_from": "2025-03-15",
+   "valid_to": "2025-04-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "33.54",
+     "tmc": "50.31"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "29.17",
+     "tmc": "43.76"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.83",
+     "tmc": "17.75"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.73",
+     "tmc": "7.10"
+    }
+   }
+  },
+  {
+   "period_id": "2025-04",
+   "valid_from": "2025-04-15",
+   "valid_to": "2025-05-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "33.35",
+     "tmc": "50.03"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "29.00",
+     "tmc": "43.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.75",
+     "tmc": "17.63"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.70",
+     "tmc": "7.05"
+    }
+   }
+  },
+  {
+   "period_id": "2025-05",
+   "valid_from": "2025-05-15",
+   "valid_to": "2025-06-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "33.16",
+     "tmc": "49.74"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "28.83",
+     "tmc": "43.25"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.67",
+     "tmc": "17.51"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.67",
+     "tmc": "7.01"
+    }
+   }
+  },
+  {
+   "period_id": "2025-06",
+   "valid_from": "2025-06-15",
+   "valid_to": "2025-07-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "32.97",
+     "tmc": "49.46"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "28.67",
+     "tmc": "43.01"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.58",
+     "tmc": "17.37"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.63",
+     "tmc": "6.95"
+    }
+   }
+  },
+  {
+   "period_id": "2025-07",
+   "valid_from": "2025-07-15",
+   "valid_to": "2025-08-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "32.78",
+     "tmc": "49.17"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "28.50",
+     "tmc": "42.75"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.50",
+     "tmc": "17.25"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.60",
+     "tmc": "6.90"
+    }
+   }
+  },
+  {
+   "period_id": "2025-08",
+   "valid_from": "2025-08-15",
+   "valid_to": "2025-09-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "32.58",
+     "tmc": "48.87"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "28.33",
+     "tmc": "42.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.42",
+     "tmc": "17.13"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.57",
+     "tmc": "6.86"
+    }
+   }
+  },
+  {
+   "period_id": "2025-09",
+   "valid_from": "2025-09-15",
+   "valid_to": "2025-10-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "32.39",
+     "tmc": "48.59"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "28.17",
+     "tmc": "42.26"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.33",
+     "tmc": "17.00"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.53",
+     "tmc": "6.80"
+    }
+   }
+  },
+  {
+   "period_id": "2025-10",
+   "valid_from": "2025-10-15",
+   "valid_to": "2025-11-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "32.20",
+     "tmc": "48.30"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "28.00",
+     "tmc": "42.00"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.25",
+     "tmc": "16.88"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.50",
+     "tmc": "6.75"
+    }
+   }
+  },
+  {
+   "period_id": "2025-11",
+   "valid_from": "2025-11-15",
+   "valid_to": "2025-12-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "32.01",
+     "tmc": "48.02"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.83",
+     "tmc": "41.75"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.17",
+     "tmc": "16.76"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.47",
+     "tmc": "6.71"
+    }
+   }
+  },
+  {
+   "period_id": "2025-12",
+   "valid_from": "2025-12-15",
+   "valid_to": "2026-01-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.82",
+     "tmc": "47.73"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.67",
+     "tmc": "41.51"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.08",
+     "tmc": "16.62"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.43",
+     "tmc": "6.65"
+    }
+   }
+  },
+  {
+   "period_id": "2026-01",
+   "valid_from": "2026-01-15",
+   "valid_to": "2026-02-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.62",
+     "tmc": "47.43"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.50",
+     "tmc": "41.25"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "11.00",
+     "tmc": "16.50"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.40",
+     "tmc": "6.60"
+    }
+   }
+  },
+  {
+   "period_id": "2026-02",
+   "valid_from": "2026-02-15",
+   "valid_to": "2026-03-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.57",
+     "tmc": "47.36"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.45",
+     "tmc": "41.18"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.98",
+     "tmc": "16.47"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.39",
+     "tmc": "6.59"
+    }
+   }
+  },
+  {
+   "period_id": "2026-03",
+   "valid_from": "2026-03-15",
+   "valid_to": "2026-04-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.52",
+     "tmc": "47.28"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.41",
+     "tmc": "41.12"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.96",
+     "tmc": "16.44"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.38",
+     "tmc": "6.57"
+    }
+   }
+  },
+  {
+   "period_id": "2026-04",
+   "valid_from": "2026-04-15",
+   "valid_to": "2026-05-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.47",
+     "tmc": "47.21"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.36",
+     "tmc": "41.04"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.95",
+     "tmc": "16.43"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.37",
+     "tmc": "6.56"
+    }
+   }
+  },
+  {
+   "period_id": "2026-05",
+   "valid_from": "2026-05-15",
+   "valid_to": "2026-06-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.42",
+     "tmc": "47.13"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.32",
+     "tmc": "40.98"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.93",
+     "tmc": "16.40"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.36",
+     "tmc": "6.54"
+    }
+   }
+  },
+  {
+   "period_id": "2026-06",
+   "valid_from": "2026-06-15",
+   "valid_to": "2026-07-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.36",
+     "tmc": "47.04"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.27",
+     "tmc": "40.91"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.91",
+     "tmc": "16.37"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.35",
+     "tmc": "6.53"
+    }
+   }
+  },
+  {
+   "period_id": "2026-07",
+   "valid_from": "2026-07-15",
+   "valid_to": "2026-08-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.31",
+     "tmc": "46.97"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.23",
+     "tmc": "40.85"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.89",
+     "tmc": "16.34"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.35",
+     "tmc": "6.53"
+    }
+   }
+  },
+  {
+   "period_id": "2026-08",
+   "valid_from": "2026-08-15",
+   "valid_to": "2026-09-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.26",
+     "tmc": "46.89"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.18",
+     "tmc": "40.77"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.87",
+     "tmc": "16.31"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.34",
+     "tmc": "6.51"
+    }
+   }
+  },
+  {
+   "period_id": "2026-09",
+   "valid_from": "2026-09-15",
+   "valid_to": "2026-10-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.21",
+     "tmc": "46.82"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.14",
+     "tmc": "40.71"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.85",
+     "tmc": "16.28"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.33",
+     "tmc": "6.50"
+    }
+   }
+  },
+  {
+   "period_id": "2026-10",
+   "valid_from": "2026-10-15",
+   "valid_to": "2026-11-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.15",
+     "tmc": "46.73"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.09",
+     "tmc": "40.64"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.84",
+     "tmc": "16.26"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.32",
+     "tmc": "6.48"
+    }
+   }
+  },
+  {
+   "period_id": "2026-11",
+   "valid_from": "2026-11-15",
+   "valid_to": "2026-12-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.10",
+     "tmc": "46.65"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.05",
+     "tmc": "40.58"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.82",
+     "tmc": "16.23"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.31",
+     "tmc": "6.47"
+    }
+   }
+  },
+  {
+   "period_id": "2026-12",
+   "valid_from": "2026-12-15",
+   "valid_to": "2027-01-14",
+   "rates": {
+    "non_reajustable_clp_under_50_uf": {
+     "corriente": "31.05",
+     "tmc": "46.58"
+    },
+    "non_reajustable_clp_50_to_200_uf": {
+     "corriente": "27.00",
+     "tmc": "40.50"
+    },
+    "non_reajustable_clp_over_200_uf": {
+     "corriente": "10.80",
+     "tmc": "16.20"
+    },
+    "reajustable_uf_all": {
+     "corriente": "4.30",
+     "tmc": "6.45"
+    }
    }
   }
- }
+ ]
 }

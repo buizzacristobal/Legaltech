@@ -24,21 +24,17 @@
 | Tasa Máxima Convencional (TMC) | Ceiling = 1.5 × interés corriente (art. 6) | Agreed rate is capped; a warning is emitted |
 
 - Interest is **simple**: interest on interest (anatocismo) is not modelled.
-- The engine uses **annual rate / 365** per calendar day; the basis is a single constant
-  (`DAY_COUNT_BASIS`) and is a documented convention to confirm with the supervising attorney.
-- The rate is the one published for the **calendar month** containing each day.
+- Day count is selectable per liquidation (`day_count`: ACT/360 default, ACT/365). **UNVERIFIED** which one courts apply; it is printed on every ledger.
+- Rates have explicit `valid_from`/`valid_to` (CMF certificates effective from publication, ~15th). **UNVERIFIED** against official certificates.
 
 ### 2.1 Operation categories
 
-- **No reajustables (CLP)**: `clp_lt_200` (< 200 UF) and `clp_gte_200` (≥ 200 UF).
+- **No reajustables (CLP)**: ≤ 50 UF, 50–200 UF, ≥ 200 UF (Ley 20.715 brackets; ≥ 200 UF merges 200–5.000 and > 5.000 UF — to confirm).
   The bracket is fixed by the capital's UF value on the **issue date**.
 - **Reajustables (UF)**: `uf` category. Capital and interest accrue in UF; CLP
   equivalents use the UF of each date; final amounts convert at the cut-off date.
 
-> **Scope note**: the CMF publishes finer categories (e.g. ≤ 50 UF operations have a
-> different ceiling under Ley 18.010 art. 6, as amended). They are **out of scope** for
-> now; the two brackets above follow the product specification. Extend `RateCategory`
-> and the seed file to add them.
+> TMC is not always 1.5 × corriente for the lower brackets; the table stores each TMC explicitly.
 
 ### 2.2 UF value
 
@@ -60,7 +56,7 @@ rows add up exactly to the total.
 - **Suma** and header: *S.J.L. en lo Civil* (presidencia del tribunal).
 - **Lo principal**: demanda ejecutiva, mandamiento de ejecución y embargo.
   Sections: hechos, derecho, petitorio.
-- **Primer otrosí**: acompaña título ejecutivo en custodia (art. 434 N° 4 CPC / Ley 19.983).
+- **Primer otrosí**: acompaña título ejecutivo en custodia (pagaré: art. 434 N° 4 CPC; factura: art. 434 N° 7 CPC + Ley 19.983 art. 5).
 - **Segundo otrosí**: señala bienes para la traba del embargo.
 - **Tercer otrosí**: acredita personería (if acting as legal representative).
 - **Cuarto otrosí**: patrocinio y poder (Ley 18.120).

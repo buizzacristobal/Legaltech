@@ -14,9 +14,22 @@ class Currency(str, Enum):
 
 
 class RateCategory(str, Enum):
-    CLP_LT_200 = "clp_lt_200"
-    CLP_GTE_200 = "clp_gte_200"
-    UF = "uf"
+    CLP_UNDER_50 = "non_reajustable_clp_under_50_uf"  # <= 50 UF
+    CLP_50_TO_200 = "non_reajustable_clp_50_to_200_uf"  # > 50 and < 200 UF
+    CLP_OVER_200 = "non_reajustable_clp_over_200_uf"  # >= 200 UF
+    UF = "reajustable_uf_all"
+
+
+class DayCount(str, Enum):
+    """Day-count convention. Which one courts apply is UNVERIFIED; it is recorded
+    on every ledger so the attorney can confirm it."""
+
+    ACT_360 = "ACT/360"
+    ACT_365 = "ACT/365"
+
+    @property
+    def basis(self) -> Decimal:
+        return Decimal(360 if self is DayCount.ACT_360 else 365)
 
 
 class Phase(str, Enum):
@@ -35,6 +48,7 @@ class LiquidationParams(BaseModel):
     agreed_rate: Decimal | None = Field(
         default=None, ge=0, description="Annual agreed interest, in percent"
     )
+    day_count: DayCount = DayCount.ACT_360
 
     @model_validator(mode="after")
     def _check_dates(self) -> "LiquidationParams":
@@ -91,5 +105,6 @@ class LiquidationLedger(BaseModel):
     interest_native: Decimal  # rounded: CLP -> 0 dp, UF -> 4 dp
     interest_clp: Decimal
     total_clp: Decimal
+    day_count: DayCount
     rate_table_verified: bool
     warnings: list[str] = Field(default_factory=list)

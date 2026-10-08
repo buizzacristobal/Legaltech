@@ -96,11 +96,12 @@ def _law(instr: Instrument) -> list[str]:
     if isinstance(instr, Pagare):
         base.append("El pagaré se rige por la Ley N° 18.092 y, en lo pertinente, por las "
                     "reglas de la letra de cambio; su suscripción consta en el título que se "
-                    "acompaña (art. 434 N° 4 CPC).")
+                    "acompaña (art. 434 N° 4 CPC; arts. 102 y siguientes de la Ley N° 18.092).")
     else:
-        base.append("La factura electrónica tiene mérito ejecutivo conforme a la Ley N° 19.983, "
-                    "habiéndose emitido la copia cedible y acreditado el recibo de las "
-                    "mercaderías o servicios.")
+        base.append("La factura electrónica tiene mérito ejecutivo conforme al artículo 434 "
+                    "N° 7 del Código de Procedimiento Civil, en relación con el artículo 5 de "
+                    "la Ley N° 19.983, no habiendo sido reclamada dentro de ocho días corridos "
+                    "(art. 3) y habiéndose acreditado el recibo de las mercaderías o servicios.")
     base.append("Los intereses se devengan conforme a la Ley N° 18.010, sin exceder la tasa "
                 "máxima convencional.")
     return base
@@ -120,8 +121,8 @@ def build_lawsuit(instr: Instrument, ledger: LiquidationLedger, attorney: Attorn
     otrosies: list[tuple[str, list[str]]] = [
         (f"Acompaña {title.lower()} en custodia",
          [f"Solicito a US. tener por acompañado el {title.lower()} que sirve de título "
-          f"ejecutivo, y disponer su custodia en el tribunal (art. 434 CPC; Ley N° 19.983 "
-          f"cuando corresponda), junto con la liquidación de la deuda."]),
+          f"ejecutivo, y disponer su custodia en el tribunal (art. 434 N° 4 o N° 7 CPC, según corresponda; "
+          f"Ley N° 19.983), junto con la liquidación de la deuda."]),
         ("Señala bienes para la traba del embargo",
          ["Solicito a US. tener presente que, sin perjuicio de lo que se señale en la "
           "oportunidad correspondiente, se designan para la traba del embargo los bienes "

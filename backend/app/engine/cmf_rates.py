@@ -1,4 +1,4 @@
-"""CMF monthly rate tables and UF series (Ley 18.010).
+"""CMF rate periods (valid_from..valid_to)  and UF series (Ley 18.010).
 
 All values are Decimals parsed from strings; floats never enter the engine.
 """
@@ -38,23 +38,26 @@ class RateTable:
         self._uf10: dict[str, Decimal] = {
             k: Decimal(v) for k, v in data["uf_10th"].items()
         }
-        self._rates: dict[str, dict[str, dict[str, Decimal]]] = {
-            month: {
-                cat: {"corriente": Decimal(r["corriente"]), "tmc": Decimal(r["tmc"])}
-                for cat, r in cats.items()
-            }
-            for month, cats in data["rates"].items()
-        }
+        self._periods: list[tuple[date, date, dict[str, dict[str, Decimal]]]] = sorted(
+            (
+                date.fromisoformat(p["valid_from"]),
+                date.fromisoformat(p["valid_to"]),
+                {c: {"corriente": Decimal(str(r["corriente"])), "tmc": Decimal(str(r["tmc"]))}
+                 for c, r in p["rates"].items()},
+            )
+            for p in data["periods"]
+        )
 
     def rate(self, d: date, category: RateCategory) -> tuple[Decimal, Decimal]:
-        """Return (interés corriente, TMC) in annual percent for `d`'s month."""
-        try:
-            r = self._rates[_month_key(d)][category.value]
-        except KeyError as exc:
-            raise RateNotFoundError(
-                f"No CMF rate for {category.value} in {_month_key(d)}"
-            ) from exc
-        return r["corriente"], r["tmc"]
+        """Return (interés corriente, TMC), annual %, of the period valid on `d`."""
+        for start, end, cats in self._periods:
+            if start <= d <= end:
+                try:
+                    r = cats[category.value]
+                except KeyError as exc:
+                    raise RateNotFoundError(f"No {category.value} rate for {d}") from exc
+                return r["corriente"], r["tmc"]
+        raise RateNotFoundError(f"No CMF rate period covers {d.isoformat()}")
 
     def uf_value(self, d: date) -> Decimal:
         """UF on `d`: geometric daily interpolation between the 10th anchors,

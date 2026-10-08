@@ -3,7 +3,7 @@
 Pure Decimal arithmetic. No LLM, no floats, no I/O besides the rate table.
 
 Modelling conventions (documented in docs/LEGAL_SPEC.md):
-  * Interest is simple (no anatocismo) and accrues at annual_rate / 365 per day.
+  * Interest is simple (no anatocismo): annual_rate / basis per day (params.day_count).
   * Conventional interest accrues (issue, maturity]; moratory (maturity, cutoff].
   * Moratory rate = agreed rate if any, else interés corriente; always <= TMC.
   * The CLP bracket (<200 UF / >=200 UF) is fixed by the capital's UF value on
@@ -28,7 +28,7 @@ from app.schemas.liquidation import (
     RateDecision,
 )
 
-DAY_COUNT_BASIS = Decimal(365)
+UF_FLOOR = Decimal(50)
 UF_THRESHOLD = Decimal(200)
 _PCT = Decimal(100)
 _CLP_STEP = Decimal(1)
@@ -42,9 +42,11 @@ def _round(value: Decimal, step: Decimal) -> Decimal:
 def select_category(currency: Currency, amount_in_uf: Decimal) -> RateCategory:
     if currency is Currency.UF:
         return RateCategory.UF
+    if amount_in_uf <= UF_FLOOR:
+        return RateCategory.CLP_UNDER_50
     if amount_in_uf < UF_THRESHOLD:
-        return RateCategory.CLP_LT_200
-    return RateCategory.CLP_GTE_200
+        return RateCategory.CLP_50_TO_200
+    return RateCategory.CLP_OVER_200
 
 
 def apply_tmc_cap(rate: Decimal, tmc_ceiling: Decimal) -> tuple[Decimal, bool]:
@@ -102,6 +104,7 @@ def calculate_day_by_day_ledger(
     uf_maturity = table.uf_value(params.maturity_date) if is_uf else None
     warnings: list[str] = []
     seen_warnings: set[str] = set()
+    warnings.append(f"Base de cálculo {params.day_count.value}: convención por confirmar.")
     if not table.verified:
         warnings.append(
             f"Tablas de tasas NO verificadas ({table.source}); no usar en juicio."
@@ -121,7 +124,7 @@ def calculate_day_by_day_ledger(
             if decision.warning and decision.warning not in seen_warnings:
                 seen_warnings.add(decision.warning)
                 warnings.append(decision.warning)
-        daily = params.principal * rate_pct / _PCT / DAY_COUNT_BASIS
+        daily = params.principal * rate_pct / _PCT / params.day_count.basis
         accrued += daily
         uf_d = table.uf_value(d) if is_uf else None
         days.append(
@@ -176,5 +179,5 @@ def calculate_day_by_day_ledger(
         params=params, category=category, days=days, months=months,
         principal_clp=principal_clp, interest_native=interest_native,
         interest_clp=interest_clp, total_clp=total_clp,
-        rate_table_verified=table.verified, warnings=warnings,
+        day_count=params.day_count, rate_table_verified=table.verified, warnings=warnings,
     )
