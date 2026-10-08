@@ -82,3 +82,77 @@ def test_uf_instrument_states_both_currencies():
     led = ledger_for(p, cutoff=date(2024, 2, 20))
     txt = text_of(generate_lawsuit_docx(p, led, ATT))
     assert "100,0000 UF" in txt and "0,1370 UF" in txt
+
+
+# --- procedural wording ---
+from app.schemas.instrument import FacturaElectronica
+
+
+def doc_text(blocks) -> str:
+    return "\n".join(b.text for b in blocks)
+
+
+def factura():
+    return FacturaElectronica(
+        folio="77", net_amount=D(100_000), vat_amount=D(19_000), total_amount=D(119_000),
+        issue_date=date(2024, 1, 1), due_date=date(2024, 1, 31), creditor=PARTY_C, debtor=PARTY_D,
+        jurisdiction=CourtJurisdiction(court_name="12° Juzgado Civil", city="Santiago"))
+
+
+def factura_ledger(f):
+    from tests.test_calculator import TABLE
+    return calculate_day_by_day_ledger(LiquidationParams(
+        principal=f.total_amount, currency=Currency.CLP, issue_date=f.issue_date,
+        maturity_date=f.due_date, cutoff_date=date(2024, 2, 29), day_count=DayCount.ACT_365), TABLE)
+
+
+def test_suma_standard_format():
+    p = pagare()
+    suma = next(b.text for b in build_lawsuit(p, ledger_for(p), ATT) if b.kind == "suma")
+    assert suma == ("EN LO PRINCIPAL: Demanda ejecutiva y mandamiento de ejecución y embargo; "
+                    "PRIMER OTROSÍ: Acompaña pagaré en custodia; SEGUNDO OTROSÍ: Señala bienes "
+                    "para la traba del embargo; TERCER OTROSÍ: Patrocinio y poder.")
+
+
+def test_suma_with_personeria():
+    p = pagare(creditor_representatives=[{**PARTY_D, "capacity": "gerente"}])
+    suma = next(b.text for b in build_lawsuit(p, ledger_for(p), ATT) if b.kind == "suma")
+    assert suma.endswith("TERCER OTROSÍ: Acredita personería; CUARTO OTROSÍ: Patrocinio y poder.")
+
+
+def test_citations_are_strict_per_instrument():
+    p = pagare()
+    txt = doc_text(build_lawsuit(p, ledger_for(p), ATT))
+    assert "artículo 434 N° 4 del Código de Procedimiento Civil y Ley N° 18.092" in txt
+    assert "N° 7" not in txt and "19.983" not in txt and " o N° " not in txt
+    f = factura()
+    txt = doc_text(build_lawsuit(f, factura_ledger(f), ATT))
+    assert "artículo 434 N° 7 del Código de Procedimiento Civil y Ley N° 19.983" in txt
+    assert "N° 4" not in txt and "18.092" not in txt
+
+
+def test_compensatory_vs_moratory_interest_split():
+    # issue 01-01, maturity 01-31, agreed 24%, ACT/365: Jan 1-31 -> 30d = 19,726.03 -> 19,726 ;
+    # total 38,794.52 -> 38,795 ; moratory = 19,069
+    p = pagare()
+    txt = doc_text(build_lawsuit(p, ledger_for(p), ATT))
+    assert "intereses compensatorios (desde la emisión hasta el vencimiento) por $19.726" in txt
+    assert "intereses moratorios (desde la fecha de mora hasta el pago efectivo) por $19.069" in txt
+    assert "$38.795" in txt and "en mora desde el 1 de febrero de 2024" in txt
+
+
+def test_no_compensatory_interest_without_agreed_rate():
+    p = pagare(agreed_rate_annual=None)
+    txt = doc_text(build_lawsuit(p, ledger_for(p), ATT))
+    assert "compensatorios" not in txt and "intereses moratorios" in txt
+
+
+def test_patrocinio_designated_by_creditor_not_self_appointed():
+    p = pagare(creditor_representatives=[{**PARTY_D, "capacity": "gerente general"}])
+    blocks = build_lawsuit(p, ledger_for(p), ATT)
+    txt = doc_text(blocks)
+    patro = next(b.text for b in blocks if "designa abogado patrocinante" in b.text)
+    assert "designa abogado patrocinante y confiere poder a don(ña) María Soto" in patro
+    assert "representada legalmente por Juan Pérez, RUT 12.345.678-5, gerente general" in patro
+    assert "Ley N° 18.120" in patro and "designo" not in txt and "confiero" not in txt
+    assert not any(b.text.startswith("María Soto, abogado") for b in blocks)

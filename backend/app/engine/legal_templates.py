@@ -6,14 +6,14 @@ is a DRAFT for attorney review; citations must be verified before filing.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date
-from decimal import Decimal
+from datetime import date, timedelta
+from decimal import ROUND_HALF_UP, Decimal
 from typing import Literal
 
 from app.schemas.instrument import (
     Attorney, FacturaElectronica, Instrument, LegalRepresentative, Pagare, Party,
 )
-from app.schemas.liquidation import Currency, LiquidationLedger
+from app.schemas.liquidation import Currency, LiquidationLedger, Phase
 
 BlockKind = Literal["banner", "suma", "heading", "paragraph", "pagebreak"]
 
@@ -66,26 +66,53 @@ def _money(instr: Instrument, ledger: LiquidationLedger) -> tuple[str, str]:
     return fmt_clp(ledger.principal_clp), fmt_clp(ledger.interest_clp)
 
 
+def _interest_parts(ledger: LiquidationLedger) -> tuple[str | None, str]:
+    """(compensatory text or None, moratory text). Compensatory interest exists only when
+    interest accrued between issue and maturity (i.e. an agreed rate)."""
+    is_uf = ledger.params.currency is Currency.UF
+    conv_days = [d for d in ledger.days if d.phase is Phase.CONVENTIONAL]
+    step = Decimal("0.0001") if is_uf else Decimal(1)
+    conv = conv_days[-1].accrued_interest.quantize(step, ROUND_HALF_UP) if conv_days else Decimal(0)
+    mor = ledger.interest_native - conv
+    if is_uf:
+        uf_cut = ledger.days[-1].uf_value if ledger.days else Decimal(0)
+        conv_clp = (conv * uf_cut).quantize(Decimal(1), ROUND_HALF_UP)
+        mor_clp = ledger.interest_clp - conv_clp
+        show = lambda n, c: f"{fmt_uf(n)} ({fmt_clp(c)})"
+    else:
+        conv_clp, mor_clp = conv, mor
+        show = lambda n, c: fmt_clp(n)
+    return (show(conv, conv_clp) if conv > 0 else None), show(mor, mor_clp)
+
+
+_COMP = "intereses compensatorios (desde la emisión hasta el vencimiento)"
+_MORA = "intereses moratorios (desde la fecha de mora hasta el pago efectivo)"
+
+
 def _facts(instr: Instrument, ledger: LiquidationLedger) -> list[str]:
     cap, intr = _money(instr, ledger)
+    comp, mor = _interest_parts(ledger)
     p = ledger.params
+    cname = instr.creditor.name
     out: list[str]
     if isinstance(instr, Pagare):
         rate = (f" pactándose un interés anual de {fmt_pct(instr.agreed_rate_annual)},"
                 if instr.agreed_rate_annual is not None else "")
         out = [f"1. Con fecha {fmt_date(instr.issue_date)}, don(ña) {instr.debtor.name} suscribió "
-               f"a favor de mi representada un pagaré por {cap},{rate} pagadero el "
+               f"a favor de {cname} un pagaré por {cap},{rate} pagadero el "
                f"{fmt_date(instr.maturity_date)}."]
     else:
         due = fmt_date(instr.due_date) if instr.due_date else fmt_date(p.maturity_date)
-        out = [f"1. Mi representada emitió la factura electrónica folio N° {instr.folio}, con "
+        out = [f"1. {cname} emitió la factura electrónica folio N° {instr.folio}, con "
                f"fecha {fmt_date(instr.issue_date)}, a cargo de {instr.debtor.name}, por "
                f"{cap}, con vencimiento el {due}."]
     out.append(f"2. El deudor no ha pagado el título, encontrándose en mora desde el "
-               f"{fmt_date(p.maturity_date)}.")
+               f"{fmt_date(p.maturity_date + timedelta(days=1))}.")
+    detail = (f"correspondientes a {_COMP} por {comp} e {_MORA} por {mor}, devengados a esa fecha"
+              if comp else f"correspondientes a {_MORA}, devengados a esa fecha")
     out.append(f"3. Según la liquidación que se acompaña (anexo), al {fmt_date(p.cutoff_date)} "
-               f"se adeuda por capital {cap} e intereses por {intr}, sin perjuicio de los que "
-               f"se devenguen hasta el pago efectivo.")
+               f"se adeuda por capital {cap} e intereses por un total de {intr}, {detail}, "
+               f"sin perjuicio de los intereses moratorios que se devenguen hasta el pago efectivo.")
     return out
 
 
@@ -111,38 +138,58 @@ def _otrosi_label(i: int) -> str:
     return f"{_ORDINALS[i]} OTROSÍ"
 
 
+def _citation(instr: Instrument) -> str:
+    if isinstance(instr, Pagare):
+        return "artículo 434 N° 4 del Código de Procedimiento Civil y Ley N° 18.092"
+    return "artículo 434 N° 7 del Código de Procedimiento Civil y Ley N° 19.983"
+
+
 def build_lawsuit(instr: Instrument, ledger: LiquidationLedger, attorney: Attorney) -> list[Block]:
     if instr.jurisdiction is None:
         raise ValueError("El tribunal competente (jurisdiction) es obligatorio")
     reps: list[LegalRepresentative] = instr.creditor_representatives
-    title, subject = _title(instr)
+    title, _ = _title(instr)
     cap, intr = _money(instr, ledger)
+    comp, mor = _interest_parts(ledger)
+    cred = instr.creditor
+    rep_names = "; ".join(f"{r.name}, RUT {r.rut}, {r.capacity}" for r in reps)
+    rep_clause = f", representada legalmente por {rep_names}" if reps else ""
 
     otrosies: list[tuple[str, list[str]]] = [
         (f"Acompaña {title.lower()} en custodia",
          [f"Solicito a US. tener por acompañado el {title.lower()} que sirve de título "
-          f"ejecutivo, y disponer su custodia en el tribunal (art. 434 N° 4 o N° 7 CPC, según corresponda; "
-          f"Ley N° 19.983), junto con la liquidación de la deuda."]),
+          f"ejecutivo conforme al {_citation(instr)}, y disponer su custodia en el tribunal, "
+          f"junto con la liquidación de la deuda."]),
         ("Señala bienes para la traba del embargo",
          ["Solicito a US. tener presente que, sin perjuicio de lo que se señale en la "
           "oportunidad correspondiente, se designan para la traba del embargo los bienes "
           "que se indicarán por escrito separado."]),
     ]
     if reps:
-        names = "; ".join(f"{r.name}, RUT {r.rut}, {r.capacity}" for r in reps)
         otrosies.append(("Acredita personería",
-                         [f"Solicito a US. tener presente que actúa por mi representada: {names}, "
-                          f"cuya personería consta en los documentos que se acompañan."]))
+                         [f"Solicito a US. tener presente que {cred.name} actúa representada "
+                          f"legalmente por {rep_names}, cuya personería consta en los "
+                          f"documentos que se acompañan."]))
     otrosies.append(("Patrocinio y poder",
-                     [f"Solicito a US. tener presente que designo abogado patrocinante y "
-                      f"confiero poder a don(ña) {attorney.name}, RUT {attorney.rut}, "
-                      f"domiciliado en {attorney.address}"
+                     [f"Solicito a US. tener presente que {cred.name}, RUT {cred.rut}"
+                      f"{rep_clause}, designa abogado patrocinante y confiere poder a "
+                      f"don(ña) {attorney.name}, RUT {attorney.rut}, domiciliado en "
+                      f"{attorney.address}"
                       + (f", correo {attorney.email}" if attorney.email else "")
                       + (f" ({attorney.bar_details})" if attorney.bar_details else "")
-                      + ", habilitado para el ejercicio de la profesión (Ley N° 18.120)."]))
+                      + ", habilitado para el ejercicio de la profesión (Ley N° 18.120), quien "
+                        "lo acepta firmando el presente escrito."]))
 
-    suma = f"SUMA: {subject.capitalize()}. " + " ".join(
-        f"{_otrosi_label(i)}: {t}." for i, (t, _) in enumerate(otrosies))
+    suma = ("EN LO PRINCIPAL: Demanda ejecutiva y mandamiento de ejecución y embargo; "
+            + "; ".join(f"{_otrosi_label(i)}: {t}" for i, (t, _) in enumerate(otrosies)) + ".")
+
+    interest_petition = (
+        f"más {comp} por concepto de {_COMP}, más {mor} por concepto de {_MORA} "
+        f"calculados al {fmt_date(ledger.params.cutoff_date)}, más los intereses moratorios "
+        f"que se devenguen hasta el pago efectivo"
+        if comp else
+        f"más {mor} por concepto de {_MORA} calculados al {fmt_date(ledger.params.cutoff_date)}, "
+        f"más los intereses moratorios que se devenguen hasta el pago efectivo")
 
     blocks = [
         Block("banner", BANNER),
@@ -150,9 +197,9 @@ def build_lawsuit(instr: Instrument, ledger: LiquidationLedger, attorney: Attorn
         Block("heading", f"S.J.L. EN LO CIVIL DE {instr.jurisdiction.city.upper()}"),
         Block("paragraph", f"({instr.jurisdiction.court_name})"),
         Block("paragraph",
-              f"{attorney.name}, abogado, en representación de {_person(instr.creditor)}, "
-              f"en juicio ejecutivo contra {_person(instr.debtor)}, a US. respetuosamente digo:"),
-        Block("heading", "LO PRINCIPAL: DEMANDA EJECUTIVA Y MANDAMIENTO DE EJECUCIÓN Y EMBARGO"),
+              f"{_person(cred)}{rep_clause}, en juicio ejecutivo contra {_person(instr.debtor)}, "
+              f"a US. respetuosamente digo:"),
+        Block("heading", "EN LO PRINCIPAL: DEMANDA EJECUTIVA Y MANDAMIENTO DE EJECUCIÓN Y EMBARGO"),
         Block("heading", "HECHOS"),
         *[Block("paragraph", t) for t in _facts(instr, ledger)],
         Block("heading", "DERECHO"),
@@ -161,12 +208,10 @@ def build_lawsuit(instr: Instrument, ledger: LiquidationLedger, attorney: Attorn
         Block("paragraph",
               f"POR TANTO, solicito a US. tener por interpuesta demanda ejecutiva en contra de "
               f"{instr.debtor.name}, acogerla a tramitación y despachar mandamiento de ejecución "
-              f"y embargo por la suma de {cap} por concepto de capital, más {intr} por concepto "
-              f"de intereses calculados al {fmt_date(ledger.params.cutoff_date)}, más los "
-              f"intereses que se devenguen hasta el pago efectivo y las costas de la causa; "
-              f"requerir de pago al deudor y, de no pagar, trabar embargo sobre bienes "
-              f"suficientes, ordenando seguir adelante la ejecución hasta hacer entero y "
-              f"cumplido pago."),
+              f"y embargo por la suma de {cap} por concepto de capital, {interest_petition} y las "
+              f"costas de la causa; requerir de pago al deudor y, de no pagar, trabar embargo "
+              f"sobre bienes suficientes, ordenando seguir adelante la ejecución hasta hacer "
+              f"entero y cumplido pago."),
     ]
     for i, (t, paras) in enumerate(otrosies):
         blocks.append(Block("heading", f"{_otrosi_label(i)}: {t}"))
