@@ -1,10 +1,12 @@
 "use client";
+import { ArrowLeft, Download } from "lucide-react";
 import { useState } from "react";
 import { generateLawsuit } from "@/lib/api";
 import { fmtClp } from "@/lib/format";
 import { normalizeRut } from "@/lib/rut";
 import type { Attorney, DayCount, Instrument, Ledger } from "@/lib/types";
 import { Alert } from "./Alert";
+import { Field } from "./ui/Field";
 
 interface Props {
   instrument: Instrument;
@@ -22,6 +24,7 @@ export function LawsuitPreview({ instrument, ledger, cutoff, dayCount, attorney,
   const [error, setError] = useState<string | null>(null);
   const court = instrument.jurisdiction ?? { court_name: "", city: "" };
   const att = (patch: Partial<Attorney>) => onAttorney({ ...attorney, ...patch });
+  const rutBad = attorney.rut.trim() !== "" && !normalizeRut(attorney.rut);
   const otrosies = ["Acompaña título en custodia", "Señala bienes para el embargo",
     ...(instrument.creditor_representatives?.length ? ["Acredita personería"] : []), "Patrocinio y poder"];
 
@@ -48,36 +51,43 @@ export function LawsuitPreview({ instrument, ledger, cutoff, dayCount, attorney,
   }
 
   return (
-    <section className="card space-y-4">
-      <h2 className="text-lg font-semibold">3. Demanda ejecutiva</h2>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <div><label className="label">Abogado patrocinante</label>
-          <input className="input" value={attorney.name} onChange={(e) => att({ name: e.target.value })} /></div>
-        <div><label className="label">RUT</label>
-          <input className="input" value={attorney.rut} onChange={(e) => att({ rut: e.target.value })} placeholder="11.111.111-1" /></div>
-        <div><label className="label">Domicilio</label>
-          <input className="input" value={attorney.address} onChange={(e) => att({ address: e.target.value })} /></div>
-        <div><label className="label">Correo (opcional)</label>
-          <input className="input" value={attorney.email ?? ""} onChange={(e) => att({ email: e.target.value })} /></div>
-        <div className="sm:col-span-2"><label className="label">Colegio / registro profesional (opcional)</label>
-          <input className="input" value={attorney.bar_details ?? ""} onChange={(e) => att({ bar_details: e.target.value })} /></div>
-        <div><label className="label">Tribunal</label>
-          <input className="input" value={court.court_name} onChange={(e) => onInstrument({ ...instrument, jurisdiction: { ...court, court_name: e.target.value } })} /></div>
-        <div><label className="label">Ciudad</label>
-          <input className="input" value={court.city} onChange={(e) => onInstrument({ ...instrument, jurisdiction: { ...court, city: e.target.value } })} /></div>
+    <section className="card space-y-6">
+      <div>
+        <h2 className="text-xl font-semibold">3. Demanda ejecutiva</h2>
+        <p className="mt-1 text-sm text-ink-600">Datos del abogado patrocinante y del tribunal. El documento se genera como borrador editable.</p>
       </div>
-      <div className="rounded bg-slate-50 p-3 text-sm">
-        <p><b>Acreedor:</b> {instrument.creditor.name} ({instrument.creditor.rut})</p>
-        <p><b>Deudor:</b> {instrument.debtor.name} ({instrument.debtor.rut})</p>
-        <p><b>Monto demandado al {cutoff}:</b> {fmtClp(ledger.total_clp)} ({ledger.day_count})</p>
-        <p><b>Secciones:</b> Suma, Hechos, Derecho, Petitorio; otrosíes: {otrosies.join(" · ")}; anexo de liquidación.</p>
+      <fieldset className="grid gap-4 sm:grid-cols-2">
+        <legend className="mb-3 text-sm font-semibold">Abogado patrocinante</legend>
+        <Field label="Nombre completo" value={attorney.name} onChange={(e) => att({ name: e.target.value })} />
+        <div>
+          <Field label="RUT" value={attorney.rut} placeholder="11.111.111-1" aria-invalid={rutBad}
+            className={rutBad ? "!border-red-400" : ""} onChange={(e) => att({ rut: e.target.value })} />
+          {rutBad && <p className="mt-1 text-xs text-red-700">Dígito verificador inválido.</p>}
+        </div>
+        <Field label="Domicilio" value={attorney.address} onChange={(e) => att({ address: e.target.value })} />
+        <Field label="Correo (opcional)" type="email" value={attorney.email ?? ""} onChange={(e) => att({ email: e.target.value })} />
+        <Field wide label="Colegio / registro profesional (opcional)" value={attorney.bar_details ?? ""} onChange={(e) => att({ bar_details: e.target.value })} />
+      </fieldset>
+      <fieldset className="grid gap-4 sm:grid-cols-2">
+        <legend className="mb-3 text-sm font-semibold">Tribunal competente</legend>
+        <Field label="Tribunal" value={court.court_name} placeholder="12° Juzgado Civil de Santiago"
+          onChange={(e) => onInstrument({ ...instrument, jurisdiction: { ...court, court_name: e.target.value } })} />
+        <Field label="Ciudad" value={court.city}
+          onChange={(e) => onInstrument({ ...instrument, jurisdiction: { ...court, city: e.target.value } })} />
+      </fieldset>
+      <div className="rounded-lg border border-line bg-paper p-4 text-sm">
+        <p className="label">Contenido del borrador</p>
+        <p>Monto demandado al {cutoff}: <strong>{fmtClp(ledger.total_clp)}</strong> ({ledger.day_count})</p>
+        <p className="mt-1 text-ink-700">Suma · Hechos · Derecho · Petitorio · Otrosíes: {otrosies.join(" · ")} · Anexo de liquidación</p>
       </div>
       <Alert kind="warn">Borrador sujeto a revisión y firma del abogado. El sistema no presenta nada en la OJV.</Alert>
       {!ledger.rate_table_verified && <Alert kind="warn">Las tasas CMF cargadas no están verificadas.</Alert>}
       {error && <Alert>{error}</Alert>}
-      <div className="flex gap-2">
-        <button className="btn-ghost" onClick={onBack}>Volver</button>
-        <button className="btn" disabled={busy} onClick={download}>{busy ? "Generando…" : "Descargar Demanda (.docx)"}</button>
+      <div className="flex gap-3 border-t border-line pt-5">
+        <button className="btn-ghost" onClick={onBack}><ArrowLeft className="h-4 w-4" aria-hidden />Volver</button>
+        <button className="btn-gold" disabled={busy} onClick={download}>
+          <Download className="h-4 w-4" aria-hidden />{busy ? "Generando…" : "Descargar Demanda (.docx)"}
+        </button>
       </div>
     </section>
   );
