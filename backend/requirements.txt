@@ -1,3 +1,4 @@
 pydantic>=2.6,<3
 pytest>=8
 anthropic>=0.40
+python-docx>=1.1

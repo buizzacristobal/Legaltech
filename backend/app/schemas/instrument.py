@@ -103,3 +103,19 @@ Instrument = Annotated[Union[Pagare, FacturaElectronica], Field(discriminator="k
 class ExtractionResult(BaseModel):
     instrument: Instrument
     missing_fields: list[str] = Field(default_factory=list)
+
+
+class Attorney(BaseModel):
+    """Abogado patrocinante y apoderado (Ley 18.120)."""
+
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    name: str = Field(min_length=2)
+    rut: str
+    address: str = Field(min_length=2)
+    email: str | None = None
+
+    @field_validator("rut")
+    @classmethod
+    def _rut(cls, v: str) -> str:
+        return normalize_rut(v)
