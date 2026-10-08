@@ -114,6 +114,7 @@ class Attorney(BaseModel):
     rut: str
     address: str = Field(min_length=2)
     email: str | None = None
+    bar_details: str | None = Field(default=None, description="Colegio/registro profesional")
 
     @field_validator("rut")
     @classmethod

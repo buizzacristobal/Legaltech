@@ -138,6 +138,7 @@ def build_lawsuit(instr: Instrument, ledger: LiquidationLedger, attorney: Attorn
                       f"confiero poder a don(ña) {attorney.name}, RUT {attorney.rut}, "
                       f"domiciliado en {attorney.address}"
                       + (f", correo {attorney.email}" if attorney.email else "")
+                      + (f" ({attorney.bar_details})" if attorney.bar_details else "")
                       + ", habilitado para el ejercicio de la profesión (Ley N° 18.120)."]))
 
     suma = f"SUMA: {subject.capitalize()}. " + " ".join(
