@@ -15,7 +15,7 @@ def normalize_rut(raw: str) -> str:
     cleaned = raw.replace(".", "").replace("-", "").replace(" ", "").upper()
     body, dv = cleaned[:-1], cleaned[-1:]
     if not body.isdigit() or not dv or not (dv.isdigit() or dv == "K"):
-        raise ValueError(f"RUT mal formado: {raw!r}")
+        raise ValueError("RUT mal formado")
     total, factor = 0, 2
     for ch in reversed(body):
         total += int(ch) * factor
@@ -23,7 +23,7 @@ def normalize_rut(raw: str) -> str:
     rem = 11 - total % 11
     expected = "0" if rem == 11 else "K" if rem == 10 else str(rem)
     if dv != expected:
-        raise ValueError(f"Dígito verificador inválido en RUT {raw!r}")
+        raise ValueError("Dígito verificador inválido en RUT")
     return f"{int(body):,}".replace(",", ".") + f"-{dv}"
 
 

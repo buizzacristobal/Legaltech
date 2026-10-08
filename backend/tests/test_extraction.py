@@ -67,3 +67,61 @@ def test_factura_total_checked_deterministically():
                       FacturaElectronica)
     with pytest.raises(ValidationError):
         FacturaElectronica(**{**base, "total_amount": "120000"})
+
+
+# --- openai_compatible provider (mock client, fully offline) ---
+from types import SimpleNamespace
+
+from app.core.config import Settings
+from app.services.extractor import (
+    AnthropicClient, OpenAICompatibleClient, build_client,
+)
+
+
+class FakeOpenAI:
+    def __init__(self, *contents: str) -> None:
+        self.contents, self.calls = list(contents), []
+        self.chat = SimpleNamespace(completions=SimpleNamespace(create=self._create))
+
+    def _create(self, **kw):
+        self.calls.append(kw)
+        msg = SimpleNamespace(content=self.contents.pop(0))
+        return SimpleNamespace(choices=[SimpleNamespace(message=msg)])
+
+
+def test_openai_compatible_parses_json_mode():
+    fake = FakeOpenAI(json.dumps(PAGARE))
+    client = OpenAICompatibleClient("qwen/qwen-2.5-72b-instruct", client=fake)
+    p = extract_instrument("doc", client).instrument
+    assert isinstance(p, Pagare) and p.amount == D(1_000_000)
+    call = fake.calls[0]
+    assert call["response_format"] == {"type": "json_object"} and call["temperature"] == 0
+    assert call["model"] == "qwen/qwen-2.5-72b-instruct"
+    assert "JSON Schema" in call["messages"][0]["content"]
+
+
+def test_openai_compatible_retries_on_schema_error():
+    bad = dict(PAGARE, maturity_date="2023-01-01")
+    fake = FakeOpenAI(json.dumps(bad), json.dumps(PAGARE))
+    res = extract_instrument("doc", OpenAICompatibleClient("m", client=fake))
+    assert isinstance(res.instrument, Pagare) and len(fake.calls) == 2
+    assert "inválida" in fake.calls[1]["messages"][1]["content"]
+
+
+def test_errors_never_leak_document_or_values():
+    bad = dict(PAGARE, debtor={"name": "Juan", "rut": "12.345.678-9"})
+    fake = FakeOpenAI(json.dumps(bad), json.dumps(bad))
+    with pytest.raises(ExtractionError) as ei:
+        extract_instrument("TEXTO-CONFIDENCIAL 12.345.678-9", OpenAICompatibleClient("m", client=fake))
+    msg = str(ei.value)
+    assert "CONFIDENCIAL" not in msg and "12.345.678-9" not in msg
+    assert "CONFIDENCIAL" not in fake.calls[1]["messages"][1]["content"].split("Tu respuesta")[1]
+
+
+def test_build_client_selects_provider():
+    oa = build_client(Settings(llm_provider="openai_compatible", llm_api_key="k",
+                               llm_base_url="https://openrouter.ai/api/v1", llm_model="m"))
+    assert isinstance(oa, OpenAICompatibleClient)
+    assert isinstance(build_client(Settings(llm_provider="anthropic", llm_api_key="k")), AnthropicClient)
+    with pytest.raises(RuntimeError):
+        build_client(Settings(llm_provider="openai_compatible", llm_api_key=None))

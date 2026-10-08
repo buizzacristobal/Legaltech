@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 
 from app.core.config import Settings, get_settings
 from app.schemas.instrument import ExtractionResult
-from app.services.extractor import AnthropicClient, LLMClient, extract_instrument
+from app.services.extractor import LLMClient, build_client, extract_instrument
 
 router = APIRouter()
 
@@ -15,7 +15,7 @@ class ExtractRequest(BaseModel):
 
 
 def get_llm_client(settings: Settings = Depends(get_settings)) -> LLMClient:
-    return AnthropicClient(model=settings.llm_model)
+    return build_client(settings)
 
 
 @router.post("/extract", response_model=ExtractionResult)

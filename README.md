@@ -50,8 +50,10 @@ Without an LLM key, use the **Pagaré / Factura** sample buttons in step 1 (they
 
 | Variable | Where | Purpose | Default |
 |---|---|---|---|
-| `ANTHROPIC_API_KEY` | backend | Used by `/extract` (Anthropic SDK) | — |
-| `LLM_MODEL` | backend | Extraction model | `claude-sonnet-5-5` |
+| `LLM_PROVIDER` | backend | `anthropic` or `openai_compatible` | `anthropic` |
+| `LLM_BASE_URL` | backend | OpenAI-compatible endpoint, e.g. `https://openrouter.ai/api/v1` | — |
+| `LLM_API_KEY` | backend | Provider key (anthropic falls back to `ANTHROPIC_API_KEY`) | — |
+| `LLM_MODEL` | backend | Extraction model, e.g. `qwen/qwen-2.5-72b-instruct` | `claude-sonnet-5-5` |
 | `API_KEY` | backend | If set, requests need header `X-API-Key` | unset (open) |
 | `CORS_ORIGINS` | backend | Comma-separated allowed origins | `http://localhost:3000` |
 | `NEXT_PUBLIC_API_URL` | frontend | Backend base URL | `http://localhost:8000` |
